@@ -1,0 +1,27 @@
+# Web Framework
+fastapi
+uvicorn[standard]
+
+# Config & Environment
+python-dotenv
+pydantic-settings
+
+# LangChain & AI
+langchain
+langchain-core
+langchain-google-genai
+langchain-community
+langchain-qdrant
+langchain_experimental
+langchain-redis
+docling
+
+# Databases & Infrastructure
+qdrant-client
+sqlmodel
+psycopg2-binary
+asyncpg
+redis
+
+# For Email & Forms
+python-multipart
