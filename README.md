@@ -1,6 +1,6 @@
-# Palm Mind Technology - RAG Assessment Project
+# RAG Assessment Project
 
-This repository contains the submission for the AI/ML Engineer technical assessment. It is a production-ready backend system built with FastAPI, featuring a sophisticated RAG agent with document ingestion capabilities and automated analysis.
+This repository contains the submission for the AI/ML Engineer technical assessment for the `Palm-mind-technology`. It is a production-ready backend system built with FastAPI, featuring a sophisticated RAG agent with document ingestion capabilities and automated analysis.
 
 ## Architecture Overview
 
@@ -86,34 +86,30 @@ The API is now running. The interactive documentation (your testing UI) can be a
 
 ### Testing the Interview Booking Process
 
-The agent is designed to handle interview booking as a conversational tool. To test this feature for yourself and see the confirmation email, follow these steps:
+The agent is designed to handle interview booking as a conversational tool, as if an HR manager were using it to schedule an interview with a candidate.
+
+To test this feature, you will play the role of the HR manager.
 
 1.  Go to the `/docs` page and expand the `POST /api/v1/chat/invoke` endpoint.
 2.  Click "Try it out".
-3.  Start a conversation by providing a `session_id` and expressing your intent.
+3.  Use the following request body to book an interview *for* the candidate.
 
-**Example Conversation:**
+**Example Booking Request:**
 
-*   **Your First Request:**
-    ```json
-    {
-      "session_id": "my-interview-test",
-      "user_input": "Hello, I would like to book an interview."
-    }
-    ```
-    *The agent will recognize the intent and ask for the necessary details (name, email, date, time).*
+So all you have to provide is `Full name`, `email`, `date` and `time` and then the boking interview tool will automatically sends the mail to `candidate.email@example.com` 
 
-*   **Your Second Request (providing the details):**
-    ```json
-    {
-      "session_id": "my-interview-test",
-      "user_input": "I want to book interview to name: Dipesh Chaudhary, my email is your-email@gmail.com, and I would like to book it for August 25th, 2024 at 3 PM."
-    }
-    ```
-    *(**Important:** Use the email address you configured in your `.env` file.)*
+And my maile is `9804234394d@gmail.com`
+
+```json
+{
+  "session_id": "hr-test-booking-001",
+  "user_input": "I need to book an interview with a candidate named Dipesh Chaudhary. His email is 9804234394d@gmail.com, and the time is june 30th, 2025 at 2:00 PM."
+}
+```
+*(**Note:** For your own testing, replace `candidate.email@example.com` with your own personal email address to receive the confirmation.)*
 
 **Expected Result:**
-The API will return a confirmation message like "Interview booked successfully...". Simultaneously, the system will have called the `book_interview` tool, which saves the booking to the PostgreSQL database and sends a confirmation email **to the address you provided**. Check your inbox to confirm the entire workflow was successful.
+The API will return a confirmation message. Simultaneously, the system will execute the `book_interview` tool, which saves the booking to the database and sends a confirmation email **to the candidate's email address**. Check the candidate's inbox to confirm the entire workflow was successful.
 
 ## Findings and Analysis
 

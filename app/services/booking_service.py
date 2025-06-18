@@ -54,8 +54,8 @@ async def schedule_interview(
         msg.set_content(email_content)
         msg["Subject"] = "Interview Confirmation - Palm Mind Technology"
         msg["From"] = settings.SMTP_SENDER_EMAIL
-        # For the task, we send it to our own email to prove it works.
-        msg["To"] = settings.SMTP_SENDER_EMAIL
+
+        msg["To"] = email
 
         # Use a try-except block for SMTP operations
         try:
@@ -64,7 +64,7 @@ async def schedule_interview(
                 server.login(settings.SMTP_SENDER_EMAIL, settings.SMTP_SENDER_PASSWORD)
                 server.send_message(msg)
             
-            logger.info(f"Successfully sent confirmation email to {settings.SMTP_SENDER_EMAIL}")
+            logger.info(f"Successfully sent confirmation email to {email}")
             return "Interview booked successfully. A confirmation email has been sent."
         except smtplib.SMTPException as smtp_error:
             logger.error(f"SMTP error while sending confirmation: {smtp_error}")
