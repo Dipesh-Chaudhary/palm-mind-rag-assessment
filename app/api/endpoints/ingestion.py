@@ -1,5 +1,5 @@
 from fastapi import APIRouter, UploadFile, File, Form, Depends, HTTPException
-from sqlmodel import AsyncSession
+from sqlalchemy.ext.asyncio import AsyncSession
 from app.services.document_service import process_document
 from app.core.dependencies import get_db_session
 

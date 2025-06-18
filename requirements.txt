@@ -6,7 +6,8 @@ uvicorn[standard]
 python-dotenv
 pydantic-settings
 
-# LangChain & AI
+# LangChain,langgraph & AI
+langgraph
 langchain
 langchain-core
 langchain-google-genai

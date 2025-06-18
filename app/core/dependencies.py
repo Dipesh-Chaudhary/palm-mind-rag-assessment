@@ -1,4 +1,5 @@
-from sqlmodel import create_async_engine, AsyncSession
+# from sqlmodel import create_async_engine
+from sqlalchemy.ext.asyncio import AsyncSession,create_async_engine
 from sqlalchemy.orm import sessionmaker
 from qdrant_client import QdrantClient
 from app.core.config import settings
