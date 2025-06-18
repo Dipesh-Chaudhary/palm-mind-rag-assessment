@@ -1,6 +1,7 @@
 import smtplib
 from email.message import EmailMessage
-from sqlmodel import AsyncSession, select
+from sqlmodel import select
+from sqlalchemy.ext.asyncio import AsyncSession
 from app.models.schemas import Booking
 from app.core.config import settings
 import logging
@@ -25,7 +26,7 @@ async def schedule_interview(
     try:
         new_booking = Booking(
             full_name=full_name,
-        email=email,
+            email=email,  # Fixed indentation
             interview_date=interview_date,
             interview_time=interview_time
         )
@@ -53,17 +54,22 @@ async def schedule_interview(
         msg.set_content(email_content)
         msg["Subject"] = "Interview Confirmation - Palm Mind Technology"
         msg["From"] = settings.SMTP_SENDER_EMAIL
-        # For the task, we send it to our own email to prove it works.
-        msg["To"] = settings.SMTP_SENDER_EMAIL
 
-        with smtplib.SMTP(settings.SMTP_SERVER, settings.SMTP_PORT) as server:
-            server.starttls()
-            server.login(settings.SMTP_SENDER_EMAIL, settings.SMTP_SENDER_PASSWORD)
-            server.send_message(msg)
-        
-        logger.info(f"Successfully sent confirmation email to {settings.SMTP_SENDER_EMAIL}")
-        return "Interview booked successfully. A confirmation email has been sent."
+        msg["To"] = email
+
+        # Use a try-except block for SMTP operations
+        try:
+            with smtplib.SMTP(settings.SMTP_SERVER, settings.SMTP_PORT) as server:
+                server.starttls()
+                server.login(settings.SMTP_SENDER_EMAIL, settings.SMTP_SENDER_PASSWORD)
+                server.send_message(msg)
+            
+            logger.info(f"Successfully sent confirmation email to {email}")
+            return "Interview booked successfully. A confirmation email has been sent."
+        except smtplib.SMTPException as smtp_error:
+            logger.error(f"SMTP error while sending confirmation: {smtp_error}")
+            return f"Booking saved, but failed to send confirmation email: {smtp_error}"
 
     except Exception as e:
-        logger.error(f"SMTP error while sending confirmation: {e}")
+        logger.error(f"General error while sending confirmation: {e}")
         return f"Booking saved, but failed to send confirmation email: {e}"

@@ -10,3 +10,6 @@ __pycache__/
 # Python virtual environment
 venv/
 *.venv
+
+# for docker
+*_data
