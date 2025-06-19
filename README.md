@@ -96,20 +96,28 @@ To test this feature, you will play the role of the HR manager.
 
 **Example Booking Request:**
 
-So all you have to provide is `Full name`, `email`, `date` and `time` and then the boking interview tool will automatically sends the mail to `candidate.email@example.com` 
+So all you have to provide is `Full name`, `email`, `date` and `time` and then the booking interview tool will automatically sends the mail to `candidate.email@example.com` 
 
-And my maile is `9804234394d@gmail.com`
+And my mail is `9804234394d@gmail.com`
 
 ```json
 {
-  "session_id": "hr-test-booking-001",
-  "user_input": "I need to book an interview with a candidate named Dipesh Chaudhary. His email is 9804234394d@gmail.com, and the time is june 30th, 2025 at 2:00 PM."
+  "session_id": "Hr_test_00001",
+  "user_input": "Please book an interview for the candidate Dipesh Chaudhary. His email is 9804234394d@gmail.com, and the date is june 26th, 2025 at 3:00 PM"
 }
 ```
 *(**Note:** For your own testing, replace `candidate.email@example.com` with your own personal email address to receive the confirmation.)*
 
 **Expected Result:**
 The API will return a confirmation message. Simultaneously, the system will execute the `book_interview` tool, which saves the booking to the database and sends a confirmation email **to the candidate's email address**. Check the candidate's inbox to confirm the entire workflow was successful.
+
+### Successful Demo
+
+The following screenshot shows the successful execution of this exact request using the interactive API documentation, demonstrating the agent's ability to parse the request, execute the tool, and return a confirmation.
+
+![Booking Demo](assets/booking_demo.png)
+
+---
 
 ## Findings and Analysis
 
