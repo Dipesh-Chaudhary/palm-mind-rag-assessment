@@ -113,9 +113,12 @@ The API will return a confirmation message. Simultaneously, the system will exec
 
 ### Successful Demo
 
-The following screenshot shows the successful execution of this exact request using the interactive API documentation, demonstrating the agent's ability to parse the request, execute the tool, and return a confirmation.
+The following screenshot shows the successful execution of this exact request using the interactive API documentation, demonstrating the agent's ability to parse the request, execute the tool, and return a confirmation. And also the screensot of the mail it sent to mail specified in the chat (i.e. `9804234394d@gmail.com`)
 
 ![Booking Demo](assets/booking_demo.png)
+
+![Booked Mail](assets/booked_mail_demo.png)
+
 
 ---
 
